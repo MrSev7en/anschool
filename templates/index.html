@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title>Projeto - Anhanguera</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
+    />
+    <style>
+      * {
+        font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif,
+          system-ui;
+        box-sizing: border-box;
+        letter-spacing: 0;
+        -webkit-user-drag: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+      }
+
+      :root {
+        touch-action: pan-x pan-y;
+      }
+
+      html {
+        color-scheme: dark;
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        min-width: 100vw;
+        min-height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden auto;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      img {
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+    </style>
+    <style>
+      :root {
+        --colors-transparent: #00000000;
+        --colors-black: #000000;
+        --colors-white: #ffffff;
+        --colors-gray: #26262a;
+        --colors-dark: #94959c;
+        --colors-light: #d4d5d9;
+        --colors-placeholder: #9999a1;
+        --colors-background: #09090b;
+        --colors-primary: #5500ff;
+        --colors-error: #e92323;
+      }
+
+      body {
+        background-color: var(--colors-background);
+      }
+
+      h1 {
+        color: var(--colors-white);
+        margin: 0;
+        padding: 0;
+        font-size: 1.75rem;
+        font-weight: 600;
+        line-height: 1.875rem;
+      }
+
+      h2 {
+        color: var(--colors-white);
+        margin: 0;
+        padding: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.75rem;
+      }
+
+      h3 {
+        color: var(--colors-white);
+        margin: 0;
+        padding: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.5rem;
+      }
+
+      h4 {
+        color: var(--colors-white);
+        margin: 0;
+        padding: 0;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.25rem;
+      }
+
+      h5 {
+        color: var(--colors-white);
+        margin: 0;
+        padding: 0;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1rem;
+      }
+
+      h6 {
+        color: var(--colors-white);
+        margin: 0;
+        padding: 0;
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 0.875rem;
+      }
+
+      p {
+        color: var(--colors-white);
+        margin: 0;
+        padding: 0;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.25rem;
+      }
+
+      span {
+        color: var(--colors-white);
+        margin: 0;
+        padding: 0;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1rem;
+      }
+
+      button {
+        background-color: var(--colors-white);
+        color: var(--colors-black);
+        width: 100%;
+        height: fit-content;
+        padding: 0.375rem 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.25rem;
+        cursor: pointer;
+        border: none;
+        border-radius: 0.25rem;
+        outline: none;
+        user-select: none;
+        transition: filter 0.2s ease;
+      }
+
+      button:focus-visible:not(:disabled) {
+        outline: var(--colors-white) 1px solid;
+        outline-offset: 1px;
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+      }
+
+      button:hover:not(:disabled) {
+        filter: brightness(0.875);
+      }
+
+      input {
+        background-color: var(--colors-transparent);
+        color: var(--colors-white);
+        width: 100%;
+        height: fit-content;
+        padding: 0.375rem 0.75rem;
+        border: var(--colors-gray) 1px solid;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.25rem;
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      input[type='number'] {
+        appearance: textfield;
+        -moz-appearance: textfield;
+      }
+
+      input:focus {
+        border-color: var(--colors-light);
+        outline: none;
+      }
+
+      input::placeholder {
+        color: var(--colors-placeholder);
+        opacity: 0.5;
+        user-select: none;
+      }
+
+      select {
+        background-color: var(--colors-transparent);
+        color: var(--colors-white);
+        width: 100%;
+        height: fit-content;
+        padding: 0.375rem 0.75rem;
+        border: var(--colors-gray) 1px solid;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.25rem;
+        appearance: none;
+        -moz-appearance: none;
+        outline: none;
+        cursor: pointer;
+      }
+
+      select:focus {
+        border-color: var(--colors-light);
+      }
+
+      option {
+        background-color: var(--colors-background);
+      }
+
+      img {
+        object-fit: cover;
+      }
+
+      *.paper {
+        border: var(--colors-gray) 1px solid;
+        border-radius: 0.25rem;
+      }
+    </style>
+    <style>
+      *.color-black {
+        color: var(--colors-black);
+      }
+
+      *.color-white {
+        color: var(--colors-white);
+      }
+
+      *.color-gray {
+        color: var(--colors-gray);
+      }
+
+      *.color-dark {
+        color: var(--colors-dark);
+      }
+
+      *.color-light {
+        color: var(--colors-light);
+      }
+
+      *.color-placeholder {
+        color: var(--colors-placeholder);
+      }
+
+      *.color-background {
+        color: var(--colors-background);
+      }
+
+      *.color-primary {
+        color: var(--colors-primary);
+      }
+
+      *.color-error {
+        color: var(--colors-error);
+      }
+
+      *.width-full {
+        width: 100%;
+      }
+
+      *.width-fit {
+        width: fit-content;
+      }
+
+      *.width-xl {
+        width: 32rem;
+      }
+
+      *.width-lg {
+        width: 24rem;
+      }
+
+      *.width-md {
+        width: 16rem;
+      }
+
+      *.width-sm {
+        width: 8rem;
+      }
+
+      *.width-xs {
+        width: 4rem;
+      }
+
+      *.height-full {
+        height: 100%;
+      }
+
+      *.height-fit {
+        height: fit-content;
+      }
+
+      *.height-xl {
+        height: 32rem;
+      }
+
+      *.height-lg {
+        height: 24rem;
+      }
+
+      *.height-md {
+        height: 16rem;
+      }
+
+      *.height-sm {
+        height: 8rem;
+      }
+
+      *.height-xs {
+        height: 4rem;
+      }
+
+      *.row {
+        display: flex;
+        flex-direction: row;
+      }
+
+      *.column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      *.row-align-top-left {
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+
+      *.row-align-top {
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      *.row-align-top-right {
+        align-items: flex-start;
+        justify-content: flex-end;
+      }
+
+      *.row-align-center-left {
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      *.row-align-center {
+        align-items: center;
+        justify-content: center;
+      }
+
+      *.row-align-center-right {
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      *.row-align-bottom-left {
+        align-items: flex-end;
+        justify-content: flex-start;
+      }
+
+      *.row-align-bottom {
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      *.row-align-bottom-right {
+        align-items: flex-end;
+        justify-content: flex-end;
+      }
+
+      *.column-align-top-left {
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+
+      *.column-align-top {
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      *.column-align-top-right {
+        align-items: flex-start;
+        justify-content: flex-end;
+      }
+
+      *.column-align-center-left {
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      *.column-align-center {
+        align-items: center;
+        justify-content: center;
+      }
+
+      *.column-align-center-right {
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      *.column-align-bottom-left {
+        align-items: flex-end;
+        justify-content: flex-start;
+      }
+
+      *.column-align-bottom {
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      *.column-align-bottom-right {
+        align-items: flex-end;
+        justify-content: flex-end;
+      }
+
+      *.gap-between {
+        justify-content: space-between;
+      }
+
+      *.gap-xs {
+        gap: 0.25rem;
+      }
+
+      *.gap-sm {
+        gap: 0.5rem;
+      }
+
+      *.gap-md {
+        gap: 1rem;
+      }
+
+      *.gap-lg {
+        gap: 2rem;
+      }
+
+      *.gap-xl {
+        gap: 4rem;
+      }
+
+      *.padding-xs {
+        padding: 0.25rem;
+      }
+
+      *.padding-sm {
+        padding: 0.5rem;
+      }
+
+      *.padding-md {
+        padding: 1rem;
+      }
+
+      *.padding-lg {
+        padding: 2rem;
+      }
+
+      *.padding-xl {
+        padding: 4rem;
+      }
+
+      *.margin-auto {
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="column margin-auto padding-md column-align-center gap-lg"
+      id="auth"
+    >
+      <img
+        class="width-md"
+        src="https://raw.githubusercontent.com/MrSev7en/anschool/refs/heads/main/public/anhanguera.png"
+      />
+      <div class="row row-align-top gap-lg">
+        <section class="column column-align-center gap-md">
+          <form
+            class="paper width-lg column padding-md column-align-center gap-md"
+            action="/signup"
+            method="post"
+          >
+            <h2>Cadastro no sistema</h2>
+            <span class="color-dark">
+              Para se cadastrar em nosso sistema, informe seus dados de
+              identificação abaixo:
+            </span>
+            <div class="column width-full gap-xs" id="signup-field-type">
+              <span class="color-light">Tipo de cadastro:</span>
+              <select
+                id="signup-type"
+                name="type"
+                onchange="signupOnChangeAccessType()"
+              >
+                <option value="visitor" selected>Visitante</option>
+                <option value="employee">Funcionário</option>
+              </select>
+            </div>
+            <div class="column width-full gap-xs" id="signup-field-name">
+              <span class="color-light">Nome:</span>
+              <input
+                type="text"
+                name="name"
+                minlength="1"
+                maxlength="128"
+                required
+                id="signup-name"
+              />
+            </div>
+            <div class="column width-full gap-xs" id="signup-field-document">
+              <span class="color-light">CPF:</span>
+              <input
+                type="number"
+                name="document"
+                placeholder="Somente números"
+                min="10000000000"
+                max="99999999999"
+                minlength="11"
+                maxlength="11"
+                required
+                id="signup-document"
+              />
+            </div>
+            <div class="column width-full gap-xs" id="signup-field-phone">
+              <span class="color-light">Número de telefone:</span>
+              <input
+                type="number"
+                name="phone"
+                placeholder="Somente números"
+                min="10000000000"
+                max="99999999999"
+                minlength="11"
+                maxlength="11"
+                id="signup-phone"
+              />
+            </div>
+            <div class="column width-full gap-xs" id="signup-field-email">
+              <span class="color-light">Endereço de e-mail:</span>
+              <input
+                type="email"
+                name="email"
+                minlength="1"
+                maxlength="128"
+                id="signup-email"
+              />
+            </div>
+            <div class="column width-full gap-xs" id="signup-field-password">
+              <span class="color-light">Senha:</span>
+              <input
+                type="password"
+                name="password"
+                placeholder="********"
+                minlength="8"
+                maxlength="128"
+                required
+                id="signup-password"
+              />
+            </div>
+            <span class="color-error" id="signup-error">
+              Não foi possível realizar seu cadastro, algum dos dados inseridos
+              já estão em uso.
+            </span>
+            <button type="submit">Cadastrar</button>
+          </form>
+        </section>
+        <h4 class="color-dark margin-auto">ou</h4>
+        <section class="column column-align-center gap-md">
+          <form
+            class="paper width-lg column padding-md column-align-center gap-md"
+            action="/signin"
+            method="post"
+          >
+            <h2>Acesso ao sistema</h2>
+            <span class="color-dark">
+              Para acessar o sistema, informe seus dados de identificação
+              abaixo:
+            </span>
+            <div class="column width-full gap-xs" id="signin-field-type">
+              <span class="color-light">Tipo de acesso:</span>
+              <select id="signin-type" name="type">
+                <option value="visitor" selected>Visitante</option>
+                <option value="employee">Funcionário</option>
+              </select>
+            </div>
+            <div class="column width-full gap-xs" id="signin-field-document">
+              <span class="color-light">CPF:</span>
+              <input
+                type="number"
+                name="document"
+                placeholder="Somente números"
+                min="10000000000"
+                max="99999999999"
+                minlength="11"
+                maxlength="11"
+                required
+                id="signin-document"
+              />
+            </div>
+            <div class="column width-full gap-xs" id="signin-field-password">
+              <span class="color-light">Senha:</span>
+              <input
+                type="password"
+                name="password"
+                placeholder="********"
+                minlength="8"
+                maxlength="128"
+                required
+                id="signin-password"
+              />
+            </div>
+            <span class="color-error" id="signin-error">
+              Não foi possível realizar seu acesso, verifique os dados inseridos
+              e tente novamente.
+            </span>
+            <button type="submit">Entrar</button>
+          </form>
+        </section>
+      </div>
+    </div>
+    <div
+      class="column margin-auto padding-md column-align-center gap-lg"
+      id="manager"
+    >
+      <img
+        class="width-md"
+        src="https://raw.githubusercontent.com/MrSev7en/anschool/refs/heads/main/public/anhanguera.png"
+      />
+      <section
+        class="paper width-xl column padding-md column-align-center gap-md"
+      >
+        <h2>Usuários cadastrados</h2>
+        <span class="color-dark">
+          Abaixo estão listados todos os usuários cadastrados em nosso sistema:
+          * você pode remover usuários indesejados a qualquer momento.
+        </span>
+        {% for user in users %}
+        <div
+          class="paper width-full padding-sm row row-align-center gap-between"
+        >
+          <div class="column gap-xs">
+            <h6 class="color-placeholder">Tipo de acesso:</h6>
+            <span>{{ user.type }}</span>
+          </div>
+          <div class="column gap-xs">
+            <div class="column">
+              <h6 class="color-placeholder">Nome:</h6>
+              <span>{{ user.name }}</span>
+            </div>
+            <div class="column">
+              <h6 class="color-placeholder">CPF:</h6>
+              <span>{{ user.document }}</span>
+            </div>
+          </div>
+          <div class="column gap-xs">
+            <div class="column">
+              <h6 class="color-placeholder">Endereço de e-mail:</h6>
+              <span>{{ user.email }}</span>
+            </div>
+            <div class="column">
+              <h6 class="color-placeholder">Telefone:</h6>
+              <span>{{ user.phone }}</span>
+            </div>
+          </div>
+          <button class="width-fit" type="button">Remover</button>
+        </div>
+        {% endfor %}
+        <button onclick="managerOnClickBackButton()">Voltar</button>
+      </section>
+    </div>
+    <script type="text/javascript">
+      function signupOnChangeAccessType() {
+        const type = document.getElementById('signup-type');
+        const email = document.getElementById('signup-field-email');
+        const phone = document.getElementById('signup-field-phone');
+
+        if (type.value === 'employee') {
+          email.removeAttribute('style');
+          phone.removeAttribute('style');
+        } else {
+          email.style.display = 'none';
+          phone.style.display = 'none';
+        }
+      }
+
+      function managerOnClickBackButton() {
+        window.location.href = '/';
+      }
+
+      const signupSection = document.getElementById('auth');
+      const managerSection = document.getElementById('manager');
+
+      const signupError = document.getElementById('signup-error');
+      const signinError = document.getElementById('signin-error');
+
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const authStatus = urlSearchParams.get('auth');
+
+      const signupStatus = urlSearchParams.get('signup');
+      const signinStatus = urlSearchParams.get('signin');
+
+      if (authStatus === 'success') {
+        signupSection.style.display = 'none';
+      } else {
+        managerSection.style.display = 'none';
+      }
+
+      if (signupStatus === 'error') {
+        signupError.style.display = 'flex';
+      } else {
+        signupError.style.display = 'none';
+      }
+
+      if (signinStatus === 'error') {
+        signinError.style.display = 'flex';
+      } else {
+        signinError.style.display = 'none';
+      }
+
+      signupOnChangeAccessType();
+    </script>
+  </body>
+</html>
