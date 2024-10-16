@@ -294,6 +294,10 @@
         width: 32rem;
       }
 
+      *.width-2xl {
+        width: 48rem;
+      }
+
       *.width-lg {
         width: 24rem;
       }
@@ -320,6 +324,10 @@
 
       *.height-xl {
         height: 32rem;
+      }
+
+      *.height-2xl {
+        height: 48rem;
       }
 
       *.height-lg {
@@ -500,7 +508,7 @@
         <section class="column column-align-center gap-md">
           <form
             class="paper width-lg column padding-md column-align-center gap-md"
-            action="/signup"
+            action="signup"
             method="post"
           >
             <h2>Cadastro no sistema</h2>
@@ -567,18 +575,6 @@
                 id="signup-email"
               />
             </div>
-            <div class="column width-full gap-xs" id="signup-field-password">
-              <span class="color-light">Senha:</span>
-              <input
-                type="password"
-                name="password"
-                placeholder="********"
-                minlength="8"
-                maxlength="128"
-                required
-                id="signup-password"
-              />
-            </div>
             <span class="color-error" id="signup-error">
               Não foi possível realizar seu cadastro, algum dos dados inseridos
               já estão em uso.
@@ -590,7 +586,7 @@
         <section class="column column-align-center gap-md">
           <form
             class="paper width-lg column padding-md column-align-center gap-md"
-            action="/signin"
+            action="signin"
             method="post"
           >
             <h2>Acesso ao sistema</h2>
@@ -601,22 +597,19 @@
             <div class="column width-full gap-xs" id="signin-field-type">
               <span class="color-light">Tipo de acesso:</span>
               <select id="signin-type" name="type">
-                <option value="visitor" selected>Visitante</option>
-                <option value="employee">Funcionário</option>
+                <option value="operator" selected>Operador</option>
               </select>
             </div>
             <div class="column width-full gap-xs" id="signin-field-document">
-              <span class="color-light">CPF:</span>
+              <span class="color-light">Login:</span>
               <input
-                type="number"
-                name="document"
-                placeholder="Somente números"
-                min="10000000000"
-                max="99999999999"
-                minlength="11"
-                maxlength="11"
+                type="text"
+                name="login"
+                placeholder=""
+                minlength="1"
+                maxlength="128"
                 required
-                id="signin-document"
+                id="signin-login"
               />
             </div>
             <div class="column width-full gap-xs" id="signin-field-password">
@@ -649,11 +642,12 @@
         src="https://raw.githubusercontent.com/MrSev7en/anschool/refs/heads/main/public/anhanguera.png"
       />
       <section
-        class="paper width-xl column padding-md column-align-center gap-md"
+        class="paper width-2xl column padding-md column-align-center gap-md"
       >
         <h2>Usuários cadastrados</h2>
         <span class="color-dark">
-          Abaixo estão listados todos os usuários cadastrados em nosso sistema:
+          Abaixo estão listados todos os usuários cadastrados em nosso
+          sistema:<br />
           * você pode remover usuários indesejados a qualquer momento.
         </span>
         {% for user in users %}
@@ -661,8 +655,14 @@
           class="paper width-full padding-sm row row-align-center gap-between"
         >
           <div class="column gap-xs">
-            <h6 class="color-placeholder">Tipo de acesso:</h6>
-            <span>{{ user.type }}</span>
+            <div class="column">
+              <h6 class="color-placeholder">Tipo de acesso:</h6>
+              <span>{{ user.type_formatted }}</span>
+            </div>
+            <div class="column">
+              <h6 class="color-placeholder">Status do acesso:</h6>
+              <span>{{ "Liberado" if user.status else "Revogado" }}</span>
+            </div>
           </div>
           <div class="column gap-xs">
             <div class="column">
@@ -671,7 +671,7 @@
             </div>
             <div class="column">
               <h6 class="color-placeholder">CPF:</h6>
-              <span>{{ user.document }}</span>
+              <span>{{ user.document_formatted }}</span>
             </div>
           </div>
           <div class="column gap-xs">
@@ -681,10 +681,29 @@
             </div>
             <div class="column">
               <h6 class="color-placeholder">Telefone:</h6>
-              <span>{{ user.phone }}</span>
+              <span>{{ user.phone_formatted }}</span>
             </div>
           </div>
-          <button class="width-fit" type="button">Remover</button>
+          <div class="row row-align-center gap-md">
+            <form action="status" method="post">
+              <input
+                style="display: none"
+                name="document"
+                value="{{ user.document }}"
+              />
+              <button class="width-fit" type="submit">
+                {{ "Revogar" if user.status == true else "Liberar" }}
+              </button>
+            </form>
+            <form action="remove" method="post">
+              <input
+                style="display: none"
+                name="document"
+                value="{{ user.document }}"
+              />
+              <button class="width-fit" type="submit">Remover</button>
+            </form>
+          </div>
         </div>
         {% endfor %}
         <button onclick="managerOnClickBackButton()">Voltar</button>
@@ -706,7 +725,7 @@
       }
 
       function managerOnClickBackButton() {
-        window.location.href = '/';
+        window.location.search = '';
       }
 
       const signupSection = document.getElementById('auth');
