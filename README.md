@@ -1,7 +1,7 @@
 # Projeto Anhanguera 2024 - Professor Aléssio
 A proposta do projeto é um sistema de controle de acesso, onde o usuário pode se cadastrar como visitante ou funcionário, e o operador do sistema pode controlar o acesso de cada um.
 
-## Como iniciar rodar o projeto:
+## Como iniciar o projeto:
 - Instale as dependências do projeto:
 ```bash
 pip install -r requirements.txt
